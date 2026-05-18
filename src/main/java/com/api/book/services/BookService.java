@@ -36,7 +36,7 @@ public class BookService {
     public Book getBookById(int id){
         Book book = null;
         try{
-            book = this.bookRepository.findById(id);
+            book = this.bookRepository.findById(id).orElse(null);
             // for(Book b : list){
             //     if(b.getId() == id){
             //         book = b;
@@ -66,12 +66,12 @@ public class BookService {
         //         break;
         //     }
         // }
-        Book  book = bookRepository.findById(id);
+        Book book = bookRepository.findById(id).orElse(null);
         bookRepository.delete(book);
         return book;
     }
 
-    public Book updateBook(int id, Book book){
+    public Book updateBook(long id, Book book){
         // Book bookToUpdate = null;
         // for(Book b: list){
         //     if(b.getId() == id){
