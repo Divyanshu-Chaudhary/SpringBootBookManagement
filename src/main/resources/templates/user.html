@@ -1,0 +1,24 @@
+<!doctype html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="base::layout(~{::section})"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>User Management</title>
+  </head>
+  <body>
+    <section class="p-3 mb-2 bg-success-subtle text-success-emphasis">
+      <h1>User Profile</h1>
+      <p>
+        <strong>Name:</strong>
+        <span th:text="${#strings.capitalize(user.name)}"></span>
+      </p>
+      <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+      <p>
+        <strong>Role:</strong>
+        <span th:text="${#strings.replace(user.role,'ROLE_','')}"></span>
+      </p>
+    </section>
+  </body>
+</html>

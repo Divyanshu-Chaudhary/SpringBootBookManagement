@@ -1,0 +1,88 @@
+button<!doctype html>
+<html
+  lang="en"
+  xmlns:th="https://www.thymeleaf.org"
+  xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+  th:replace="base::layout(~{::section})"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Book</title>
+  </head>
+  <body>
+    <section class="container mt-4 text-center">
+      <h1>Book Section</h1>
+
+      <table class="table table-bordered table-striped text-center">
+        <thead class="table-info">
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Available</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-info">
+          <tr
+            th:each="b : ${books}"
+            th:classappend="${b.selectedBy == #authentication.name} ? 'table-success' : ''"
+          >
+            <td th:text="${b.id}"></td>
+
+            <td th:text="${b.title}"></td>
+
+            <td th:text="${b.author.authName}"></td>
+
+            <td th:text="${b.description}"></td>
+
+            <td th:text="${b.price}"></td>
+
+            <td th:text="${b.quantity}"></td>
+
+            <td sec:authorize="hasRole('ADMIN')">
+              <a th:href="@{'/admin/updateBook/' + ${b.id}}">
+                <button class="btn btn-warning btn-sm">
+                  <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+              </a>
+
+              <a th:href="@{'/admin/deleteBook/' + ${b.id}}">
+                <button class="btn btn-danger btn-sm">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </a>
+            </td>
+            <!-- USER ACTIONS -->
+            <td sec:authorize="hasRole('USER')">
+              <!-- Borrow -->
+              <a
+                th:if="${b.selectedBy == null and b.quantity > 0}"
+                th:href="@{'/user/borrow/' + ${b.id}}"
+              >
+                <button class="btn btn-success btn-sm">Borrow</button>
+              </a>
+
+              <!-- Return -->
+              <a
+                th:if="${b.selectedBy == #authentication.name}"
+                th:href="@{'/user/return/' + ${b.id}}"
+              >
+                <button class="btn btn-danger btn-sm">Return</button>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div sec:authorize="hasRole('ADMIN')" class="text-center mt-4">
+        <a th:href="@{/admin/addBook}">
+          <button class="btn btn-primary">Add Book</button>
+        </a>
+      </div>
+    </section>
+  </body>
+</html>

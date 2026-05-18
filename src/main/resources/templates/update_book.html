@@ -1,0 +1,80 @@
+<!doctype html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="base::layout(~{::section})"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Update</title>
+  </head>
+  <body>
+    <section class="p-3 mb-2 bg-warning-subtle text-warning-emphasis">
+      <div class="container mt-5">
+        <div class="card shadow p-4">
+          <h2 class="text-center mb-4">Update Book</h2>
+
+          <form th:action="@{/admin/updateBook}" method="post">
+            <!-- Hidden ID -->
+            <input type="hidden" name="id" th:value="${book.id}" />
+
+            <!-- Title -->
+            <div class="mb-3">
+              <label class="form-label fw-bold"> Book Title </label>
+
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                name="title"
+                th:value="${book.title}"
+              />
+            </div>
+
+            <!-- Author -->
+            <div class="mb-3">
+              <label class="form-label fw-bold"> Author Name </label>
+
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                name="authName"
+                th:value="${book.author.authName}"
+              />
+            </div>
+
+            <!-- Price -->
+            <div class="mb-3">
+              <label class="form-label fw-bold"> Price </label>
+
+              <input
+                type="number"
+                class="form-control form-control-lg"
+                name="price"
+                th:value="${book.price}"
+              />
+            </div>
+
+            <!-- Description -->
+            <div class="mb-4">
+              <label class="form-label fw-bold"> Description </label>
+
+              <textarea
+                class="form-control form-control-lg"
+                rows="5"
+                name="description"
+                th:text="${book.description}"
+              >
+              </textarea>
+            </div>
+
+            <!-- Button -->
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary btn-lg px-5">
+                Update Book
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

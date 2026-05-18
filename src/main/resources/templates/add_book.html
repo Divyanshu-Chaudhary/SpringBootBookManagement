@@ -1,0 +1,100 @@
+<!doctype html>
+<html
+  lang="en"
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="base::layout(~{::section})"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Book</title>
+  </head>
+  <body>
+    <section class="container mt-4">
+      <h1>Book Details</h1>
+
+      <div>
+        <div class="col-md-8">
+          <div class="card shadow border-0">
+            <div class="card-header text-center bg-primary text-white">
+              <h2>Add New Book</h2>
+            </div>
+
+            <div class="card-body bg-light">
+              <form
+                th:action="@{/admin/saveBook}"
+                method="post"
+                th:object="${book}"
+              >
+                <!-- Book Title -->
+
+                <div class="mb-3">
+                  <label class="form-label fw-bold"> Book Title </label>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    th:field="*{title}"
+                    placeholder="Enter book title"
+                    required
+                  />
+                </div>
+
+                <!-- Author Name -->
+
+                <div class="mb-3">
+                  <label class="form-label fw-bold"> Author Name </label>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="authName"
+                    placeholder="Enter author name"
+                    required
+                  />
+                </div>
+
+                <!-- Description -->
+
+                <div class="mb-3">
+                  <label class="form-label fw-bold"> Description </label>
+
+                  <textarea
+                    class="form-control"
+                    th:field="*{description}"
+                    rows="3"
+                    placeholder="Enter description"
+                  ></textarea>
+                </div>
+
+                <!-- Price -->
+
+                <div class="mb-3">
+                  <label class="form-label fw-bold"> Price </label>
+
+                  <input
+                    type="number"
+                    step="0.01"
+                    class="form-control"
+                    th:field="*{price}"
+                    placeholder="Enter price"
+                    required
+                  />
+                </div>
+
+                <!-- Submit Button -->
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-success">Save</button>
+                  <a th:href="@{/user/book}" class="btn btn-secondary">
+                    Cancel
+                  </a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

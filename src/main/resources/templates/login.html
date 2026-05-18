@@ -1,0 +1,49 @@
+<!doctype html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{base::layout(~{::section})}"
+>
+  <section>
+    <div class="container mt-5">
+      <div class="card p-4 mx-auto" style="max-width: 500px">
+        <h1 class="text-center mb-4">
+          Login
+          <i class="fa-solid fa-user-lock"></i>
+        </h1>
+
+        <div th:if="${param.error}" class="alert alert-danger">
+          Invalid username or password
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success">
+          You have been logged out
+        </div>
+
+        <form th:action="@{/login}" method="post">
+          <div class="mb-3">
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              placeholder="Enter Email"
+            />
+          </div>
+
+          <div class="mb-3">
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              placeholder="Enter Password"
+            />
+          </div>
+
+          <button class="btn btn-primary w-100">Login</button>
+        </form>
+
+        <div class="text-center mt-3">
+          <a th:href="@{/signup}"> Create Account </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</html>

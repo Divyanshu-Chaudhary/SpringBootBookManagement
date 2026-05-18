@@ -1,0 +1,64 @@
+<!doctype html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="base::layout(~{::section})"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin</title>
+  </head>
+  <body>
+    <section class="p-3 mb-2 bg-warning-subtle text-warning-emphasis">
+      <h1>Admin Dashboard</h1>
+      <p>
+        <strong>Name:</strong>
+        <span th:text="${#strings.capitalize(user.name)}"></span>
+      </p>
+      <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+      <p>
+        <strong>Role:</strong>
+        <span th:text="${#strings.replace(user.role,'ROLE_','')}"></span>
+      </p>
+
+      <div class="container mt-5">
+        <div class="card shadow-lg border-0">
+          <div class="card-header bg-dark text-white">
+            <h3 class="mb-0 fw-bold">All Users</h3>
+          </div>
+
+          <div class="card-body">
+            <table
+              class="table table-bordered table-hover text-center align-middle"
+            >
+              <thead class="table-dark">
+                <tr>
+                  <th class="fw-bold">ID</th>
+
+                  <th class="fw-bold">Name</th>
+
+                  <th class="fw-bold">Email</th>
+
+                  <th class="fw-bold">Role</th>
+
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr th:each="u : ${users}" class="table-warning">
+                  <td th:text="${u.id}"></td>
+
+                  <td class="fw-semibold" th:text="${u.name}"></td>
+
+                  <td th:text="${u.email}"></td>
+
+                  <td th:text="${u.role}"></td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
