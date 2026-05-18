@@ -22,6 +22,9 @@ mvn spring-boot:run
 
 
 Live Demo: http://3.110.220.225:8080
+OR
+http://devdivyanshu.space:8080/login
+
 
 ## Screeshots
 
